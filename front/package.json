@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
+    "axios": "^1.7.7",
+    "expo": "^48.0.21",
+    "expo-cli": "^6.3.10",
+    "firebase": "^10.14.0",
+    "metro-core": "^0.80.12",
+    "monaco-editor": "^0.52.0",
+    "react-dom": "18.2.0",
+    "react-monaco-editor": "^0.56.2",
+    "react-native-web": "~0.18.10",
+    "react-navigation": "^4.4.4",
+    "react-navigation-stack": "^2.10.4"
+  },
+  "scripts": {
+    "start": "expo start"
+  },
+  "devDependencies": {
+    "metro": "^0.80.12"
+  }
+}
