@@ -8,14 +8,13 @@ const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors()); 
 
-// Route to execute Python code
 app.post('/run-code', (req, res) => {
   const { code } = req.body;
 
-  // Save code to a temporary Python file
+ 
   fs.writeFileSync('user_code.py', code);
 
-  // Execute the Python file
+ 
   exec('py user_code.py', (err, stdout, stderr) => {
     if ((err || stderr) && !stdout) {
       return res.json({
@@ -29,7 +28,7 @@ app.post('/run-code', (req, res) => {
       });
     }
 
-    // Define the expected output
+    
     const expectedOutput = 'Hello, World!\n';
     const isCorrect = stdout === expectedOutput;
 
@@ -40,7 +39,7 @@ app.post('/run-code', (req, res) => {
   });
 });
 
-// Start the server
+
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
 });

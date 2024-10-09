@@ -4,17 +4,17 @@ import MonacoEditor from 'react-monaco-editor';
 import axios from 'axios';
 
 const App = () => {
-  const [code, setCode] = useState(''); // Store user's code
-  const [output, setOutput] = useState(''); // Store execution result
-  const [correction, setCorrection] = useState(''); // Store the correction message
+  const [code, setCode] = useState(''); 
+  const [output, setOutput] = useState(''); 
+  const [correction, setCorrection] = useState(''); 
 
   const handleRunCode = async () => {
     try {
-      // Sending the code to the backend for execution
+     
       const res = await axios.post('http://localhost:3000/run-code', { code });
-      setOutput(res.data.output); // Set the output of the code execution
+      setOutput(res.data.output); 
 
-      // Display if the code is correct or not
+     
       if (res.data.isCorrect) {
         setCorrection('Bravo, votre code est correct !');
       } else {
@@ -30,25 +30,25 @@ const App = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Test Python: Imprimez "Hello, World!"</Text>
 
-      {/* Code editor */}
+      {}
       <MonacoEditor
         language="python"
         theme="vs-dark"
         value={code}
         options={{ selectOnLineNumbers: true }}
-        onChange={(newValue) => setCode(newValue)} // Update the code state on change
+        onChange={(newValue) => setCode(newValue)} 
         editorDidMount={(editor) => editor.focus()}
         height="200"
       />
 
-      {/* Button to run code */}
+      {}
       <Button title="Exécuter le code" onPress={handleRunCode} />
 
-      {/* Display output */}
+      {}
       <Text style={styles.outputTitle}>Résultat :</Text>
       <Text style={styles.output}>{output}</Text>
 
-      {/* Display correction */}
+      {}
       <Text style={styles.correction}>{correction}</Text>
     </View>
   );
