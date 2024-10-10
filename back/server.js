@@ -48,6 +48,26 @@ app.post("/run-code-js", (req, res) => {
   });
 });
 
+app.post("/run-code-php", (req, res) => {
+  const { code } = req.body;
+
+  fs.writeFileSync("user_code.php", code);
+
+  exec("php user_code.php", (err, stdout, stderr) => {
+    if ((err || stderr) && !stdout) {
+      return res.json({
+        output: stderr,
+        isCorrect: false,
+      });
+    } else {
+      return res.json({
+        output: stdout,
+        isCorrect: true,
+      });
+    }
+  });
+});
+
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });

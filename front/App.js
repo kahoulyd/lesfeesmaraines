@@ -12,6 +12,10 @@ const App = () => {
   const [outputJS, setOutputJS] = useState("");
   const [correctionJS, setCorrectionJS] = useState("");
 
+  const [codePHP, setCodePHP] = useState("");
+  const [outputPHP, setOutputPHP] = useState("");
+  const [correctionPHP, setCorrectionPHP] = useState("");
+
   const handleRunCodePY = async () => {
     try {
       const res = await axios.post("http://localhost:3000/run-code-py", {
@@ -45,6 +49,24 @@ const App = () => {
     } catch (error) {
       console.error(error);
       setOutputJS("Erreur lors de l’exécution du code.");
+    }
+  };
+
+  const handleRunCodePHP = async () => {
+    try {
+      const res = await axios.post("http://localhost:3000/run-code-php", {
+        code : codePHP,
+      });
+      setOutputPHP(res.data.output);
+
+      if (res.data.isCorrect) {
+        setCorrectionPHP("Bravo, votre code est correct !");
+      } else {
+        setCorrectionPHP("Votre code contient des erreurs.");
+      }
+    } catch (error) {
+      console.error(error);
+      setOutputPHP("Erreur lors de l’exécution du code.");
     }
   };
 
@@ -96,6 +118,28 @@ const App = () => {
 
       {}
       <Text style={styles.correction}>{correctionJS}</Text>
+
+      <Text style={styles.title}>Test PHP: Imprimez "Hello, World!"</Text>
+
+      {}
+      <MonacoEditor
+        language="php"
+        theme="vs-dark"
+        value={codePHP}
+        options={{ selectOnLineNumbers: true }}
+        onChange={(newValue) => setCodePHP(newValue)}
+        height="200"
+      />
+
+      {}
+      <Button title="Exécuter le code" onPress={handleRunCodePHP} />
+
+      {}
+      <Text style={styles.outputTitle}>Résultat :</Text>
+      <Text style={styles.output}>{outputPHP}</Text>
+
+      {}
+      <Text style={styles.correction}>{correctionPHP}</Text>
     </View>
   );
 };
