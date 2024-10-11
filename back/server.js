@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post("/run-code-py", (req, res) => {
+app.post("/run-code-python", (req, res) => {
   const { code } = req.body;
 
   fs.writeFileSync("user_code.py", code);
@@ -28,7 +28,7 @@ app.post("/run-code-py", (req, res) => {
   });
 });
 
-app.post("/run-code-js", (req, res) => {
+app.post("/run-code-javascript", (req, res) => {
   const { code } = req.body;
 
   fs.writeFileSync("user_code.js", code);
