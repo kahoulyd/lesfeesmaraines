@@ -6,16 +6,18 @@ import axios from "axios";
 const Compiler = ({ route }) => {
   const { language } = route.params;
 
-
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
   const [correction, setCorrection] = useState("");
 
   const handleRunCodePY = async () => {
     try {
-      const res = await axios.post(`http://localhost:3000/run-code-${language.toLowerCase()}`, {
-        code,
-      });
+      const res = await axios.post(
+        `http://localhost:3000/run-code-${language.toLowerCase()}`,
+        {
+          code,
+        }
+      );
       setOutput(res.data.output);
 
       if (res.data.isCorrect) {
@@ -31,7 +33,9 @@ const Compiler = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Test {language}: Imprimez "Hello, World!"</Text>
+      <Text style={styles.title}>
+        Test {language}: Imprimez "Hello, World!"
+      </Text>
 
       {}
       <MonacoEditor
